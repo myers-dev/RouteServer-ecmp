@@ -1,0 +1,22 @@
+#!/bin/bash
+
+az network routeserver peering list --routeserver RouteServer --resource-group ${RG} -o table
+
+peers=`az network routeserver peering list --routeserver RouteServer --resource-group ${RG} --query="[].peerIp" | tr -d "[,]\""`
+
+az network route-table create --name RT \
+                              --resource-group ${RG}
+
+IDX=0
+for peer in ${peers}; do
+    az network route-table route create --address-prefix 0.0.0.0/0 \
+                                    --name default${IDX} \
+                                    --next-hop-type VirtualAppliance \
+                                    --route-table-name RT \
+                                    --resource-group ${RG} \
+                                    --next-hop-ip-address $peer
+    let IDX=$IDX+1
+    echo $IDX
+done
+
+    
