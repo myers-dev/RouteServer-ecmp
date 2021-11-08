@@ -168,3 +168,7 @@ done
 
 (RouteConflict) Route: default1 conflicts with Route: default0. Routes cannot have the same AddressPrefix.
 ```
+
+or via the portal :
+
+![Add Route](img=/../supplementals/add_route.png)
