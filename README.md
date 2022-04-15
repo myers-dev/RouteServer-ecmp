@@ -172,3 +172,9 @@ done
 or via the portal :
 
 ![Add Route](img=/../supplementals/add_route.png)
+
+Note: CSR image might require accepting terms
+
+```
+az vm image terms accept --publisher cisco --offer cisco-csr-1000v --plan "17_3_2-byol"
+```
